@@ -33,7 +33,7 @@ jobs:
         - name: login to docker hub
           uses: docker/login-action@v3
           with:
-            username: ${{ vars.DOCKERHUB_USER }}
+            username: ${{ secrets.DOCKERHUB_USER }}
             password: ${{ secrets.DOCKERHUB_TOKEN}}
         - name: Checkout
           uses: actions/checkout@v4
@@ -44,5 +44,5 @@ jobs:
             docker-compose run --rm terraform -chdir=setup/ init -backend=false
             docker-compose run --rm terraform -chdir=setup/ validate
             docker-compose run --rm terraform -chdir=setup/ fmt -check
-            docker-compose run --rm terraform -chdir=setup/ validate
-            docker-compose run --rm terraform -chdir=setup/ fmt -check
+            docker-compose run --rm terraform -chdir=deploy/ validate
+            docker-compose run --rm terraform -chdir=deploy/ fmt -check

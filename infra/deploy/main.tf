@@ -7,11 +7,12 @@ terraform {
   }
 
   backend "s3" {
-    bucket         = "aha-devops-recipe-app-tf-state"
-    key            = "tf-state-setup"
-    region         = "us-east-1"
-    encrypt        = true
-    dynamodb_table = "aha-devops-recipe-app-api-tf-lock"
+    bucket               = "aha-devops-recipe-app-tf-state"
+    key                  = "tf-state-deploy"
+    workspace_key_prefix = "tf-state-deploy-env"
+    region               = "us-east-1"
+    encrypt              = true
+    dynamodb_table       = "aha-devops-recipe-app-api-tf-lock"
   }
 }
 
@@ -23,7 +24,7 @@ provider "aws" {
       Environment = terraform.workspace
       Project     = var.project
       contact     = var.contact
-      ManageBy    = "Terraform/setup"
+      ManageBy    = "Terraform/deploy"
     }
   }
 }
