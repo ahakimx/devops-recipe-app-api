@@ -37,6 +37,10 @@ resource "aws_iam_role_policy_attachment" "task_ssm_policy" {
 
 }
 
+resource "aws_cloudwatch_log_group" "ecs_task_logs" {
+  name = "${local.prefix}-api"
+}
+
 resource "aws_ecs_cluster" "main" {
   name = "${local.prefix}-cluster"
 }
