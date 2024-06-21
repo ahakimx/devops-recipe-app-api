@@ -33,7 +33,7 @@ resource "aws_iam_policy" "task_ssm_policy" {
 
 resource "aws_iam_role_policy_attachment" "task_ssm_policy" {
   role       = aws_iam_role.app_task.name
-  policy_arn = aws_iam_policy.task_ssm_policy.name
+  policy_arn = aws_iam_policy.task_ssm_policy.arn
 
 }
 
@@ -83,9 +83,9 @@ resource "aws_ecs_task_definition" "api" {
       logConfiguration = {
         logDriver = "awslogs"
         options = {
-          awslogs_group         = aws_cloudwatch_log_group.ecs_task_logs.name
-          awslogs_region        = data.aws_region.current.name
-          awslogs_stream-prefix = "proxy"
+          awslogs-group         = aws_cloudwatch_log_group.ecs_task_logs.name
+          awslogs-region        = data.aws_region.current.name
+          awslogs-stream-prefix = "proxy"
         }
       }
     }
